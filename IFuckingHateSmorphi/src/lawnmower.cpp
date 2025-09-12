@@ -15,6 +15,7 @@ const unsigned long PRINT_INTERVAL = 2000; // Print every 2 seconds
 void setup() {
     Serial.begin(115200);
     my_robot.BeginSmorphi();
+    my_robot.I();
     Serial.println("beginning!");
 }
 
@@ -31,7 +32,6 @@ void printSensorStatus() {
         Serial.print(right_sensor_status);
         Serial.print(" | Rear: ");
         Serial.println(rear_sensor_status);
-        
         lastPrintTime = currentTime;
     }
 }
@@ -60,7 +60,7 @@ void performTurn() {
         // Second turn right
         Serial.println("Second right turn");
         my_robot.CenterPivotRight(200);
-        delay(3000);
+        delay(2800);
         my_robot.stopSmorphi();
         delay(100);
         
@@ -95,7 +95,6 @@ void loop() {
     left_sensor_status = my_robot.module4_sensor_status(3);
     right_sensor_status = my_robot.module2_sensor_status(3);
     rear_sensor_status = my_robot.module3_sensor_status(4);
-
     Serial.println("loop started!");
 
     // Print sensor status periodically
@@ -108,7 +107,9 @@ void loop() {
         Serial.println("calling performturn!");
         performTurn();
     } else {
-        my_robot.MoveForward(100);
+        // my_robot.MoveForward(100);
         delay(50);
     }
+
+
 }
